@@ -1,24 +1,26 @@
-# BoobleToast
+## Installing
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.14.
+```bash
+$ npm install --save booble-toast
+```
 
-## Code scaffolding
+### Github
+https://github.com/ricksonsa/booble-toast
 
-Run `ng generate component component-name --project BoobleToast` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project BoobleToast`.
-> Note: Don't forget to add `--project BoobleToast` or else it will be added to the default project in your `angular.json` file. 
+### Usage
 
-## Build
+```typescript
+    import { ToastService, ToastOptions, ToastEnum } from 'booble-toast';
 
-Run `ng build BoobleToast` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Publishing
+     constructor(private toastService: ToastService) {
+    }
 
-After building your library with `ng build BoobleToast`, go to the dist folder `cd dist/booble-toast` and run `npm publish`.
+    showToast(message: string) {
+        this.toastService.showToast(new ToastOptions(message, ToastEnum.SUCCESS, true, 3000));  
+    }
+```
 
-## Running unit tests
+MessageBox.Create(title, message) - Creates an instance of MessageBox class.
 
-Run `ng test BoobleToast` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+ToastOptions receives 4 parameters: mesage, ToastEnum(css class), hasCloseButton (optional default false), time (optional default 5000)

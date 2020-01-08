@@ -2,6 +2,10 @@
 
 ```bash
 $ npm install --save booble-toast
+```
+
+### Github
+https://github.com/ricksonsa/booble-toast
 
 ### Usage
 
