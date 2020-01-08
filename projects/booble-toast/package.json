@@ -1,8 +1,25 @@
 {
   "name": "booble-toast",
-  "version": "0.0.1",
-  "peerDependencies": {
-    "@angular/common": "^8.2.14",
-    "@angular/core": "^8.2.14"
-  }
+  "version": "1.0.0",
+  "description": "Simple toast message notification for angular",
+  "author": "Rickson Alves de Sá",
+  "repository": {
+     "type": "git",
+     "url": "https://github.com/ricksonsa/booble-toast"
+   },
+   "homepage":"https://github.com/ricksonsa/booble-toast",
+   "keywords": [
+      "angular",
+      "javascript",
+      "typescript",
+      "toast",
+      "modal",
+      "message",
+      "notification",
+      "booble"
+    ],
+    "peerDependencies": {
+        "@angular/common": "^8.2.14",
+        "@angular/core": "^8.2.14"
+      },
 }
