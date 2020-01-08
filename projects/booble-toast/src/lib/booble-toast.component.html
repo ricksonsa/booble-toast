@@ -1,0 +1,13 @@
+<div
+  id="booble-toast"
+  class="booble-toast booble-fade-in {{ toastOptions.type }}"
+>
+  <div id="booble-grid" class="booble-grid">
+    <div style="display: flex;align-items: center;justify-content: center;">
+      <span> {{ toastOptions.message }} </span>
+    </div>
+    <div *ngIf="toastOptions.hasCloseButton" class="booble-close-button">
+      <span (click)="dismiss()">×</span>
+    </div>
+  </div>
+</div>

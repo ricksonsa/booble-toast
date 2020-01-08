@@ -1,6 +1,5 @@
-import {
-  Injectable
-}
+import { BoobleToastComponent } from './booble-toast.component';
+import { Injectable, ComponentRef, ComponentFactoryResolver, ApplicationRef, Injector, EmbeddedViewRef }
 
   from '@angular/core';
 
@@ -17,17 +16,17 @@ import {
 ) export class ToastService {
   timer: any;
   toast: any;
+  componentRef: ComponentRef<BoobleToastComponent>;
 
-  constructor() { }
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private applicationRef: ApplicationRef,
+    private injector: Injector
+  ) { }
 
   public showToast(toastOptions: ToastOptions) {
-    try {
-      this.removeToast();
-    }
-
-    catch (error) {
-
-    }
+    if (this.componentRef)
+      this.dismiss();
 
     if (this.timer) {
       clearTimeout(this.timer);
@@ -49,28 +48,36 @@ import {
       this.present(toastOptions);
     }
 
+
+
+    return this.componentRef;
+  }
+
+  dismiss() {
+    let toast = document.getElementById('booble-toast')
+    if (toast)
+      toast.classList.add('booble-fade-out');
+    this.applicationRef.detachView(this.componentRef.hostView);
+    this.componentRef.destroy();
   }
 
   private present(toastOptions: ToastOptions) {
-    this.toast = document.createElement('div');
-    this.toast.classList.add(`booble-toast`);
-    this.toast.classList.add('booble-fade-in');
-    this.toast.classList.add(toastOptions.type);
 
-    let gridDiv = document.createElement('div');
-    gridDiv.classList.add('booble-grid');
+    this.componentRef = this.componentFactoryResolver.resolveComponentFactory(BoobleToastComponent)
+      .create(this.injector);
 
-    gridDiv.style.gridTemplateColumns = `${toastOptions.hasCloseButton ? 'auto 5%' : 'auto'}`;
+    this.applicationRef.attachView(this.componentRef.hostView);
 
-    let span = document.createElement('span');
-    span.innerHTML = toastOptions.message;
+    const domElem = (this.componentRef.hostView as EmbeddedViewRef<any>)
+      .rootNodes[0] as HTMLElement;
 
-    let firstColumn = document.createElement('div');
-    firstColumn.setAttribute('style', `display: flex;
-      align-items: center;
-      justify-content: center; `);
-    firstColumn.appendChild(span);
-    gridDiv.appendChild(firstColumn);
+    document.body.prepend(domElem);
+    this.componentRef.instance.toastRef = this.componentRef;
+    this.componentRef.instance.applicationRef = this.applicationRef;
+
+    this.componentRef.instance.toastOptions = toastOptions;
+
+    document.getElementById('booble-grid').setAttribute('style', `grid-template-columns: ${toastOptions.hasCloseButton ? 'auto 5%;' : 'auto;'}`);
 
     if (toastOptions.hasCloseButton) {
       let lastColumn = document.createElement('div');
@@ -79,11 +86,7 @@ import {
       x.innerHTML = '&times';
       x.addEventListener('click', () => this.removeToast());
       lastColumn.appendChild(x);
-      gridDiv.appendChild(lastColumn);
     }
-
-    this.toast.appendChild(gridDiv);
-    document.body.appendChild(this.toast);
 
   }
 
@@ -91,8 +94,7 @@ import {
     if (this.timer) {
       clearTimeout(this.timer);
     }
-    this.toast.classList.add('booble-fade-out');
-    document.body.removeChild(this.toast);
+    this.dismiss();
 
   }
 }

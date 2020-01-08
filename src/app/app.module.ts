@@ -9,7 +9,8 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BoobleToastModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,19 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { ToastOptions, ToastEnum } from './booble-toast.options';
+import { Component, ComponentRef, ApplicationRef } from '@angular/core';
 
 @Component({
-  selector: 'lib-BoobleToast',
-  template: `
-    <p>
-      booble-toast works!
-    </p>
-  `,
-  styles: []
+  selector: 'booble-toast',
+  templateUrl: './booble-toast.component.html',
+  styleUrls: ['./booble-toast.component.css']
 })
-export class BoobleToastComponent implements OnInit {
+export class BoobleToastComponent {
+
+  public toastRef: any;
+  public applicationRef: ApplicationRef;
+  public toastOptions: ToastOptions = { message: '', type: ToastEnum.SUCCESS, hasCloseButton: false, time: 5000 };
 
   constructor() { }
 
-  ngOnInit() {
+
+  dismiss() {
+    document.getElementById('booble-toast').classList.add('booble-fade-out');
+    this.applicationRef.detachView(this.toastRef.hostView);
+    this.toastRef.destroy();
   }
 
 }
