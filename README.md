@@ -21,6 +21,4 @@ https://github.com/ricksonsa/booble-toast
     }
 ```
 
-MessageBox.Create(title, message) - Creates an instance of MessageBox class.
-
 ToastOptions receives 4 parameters: mesage, ToastEnum(css class), hasCloseButton (optional default false), time (optional default 5000)
