@@ -17,7 +17,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "booble-toast": [
+        "dist/booble-toast"
+      ],
+      "booble-toast/*": [
+        "dist/booble-toast/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

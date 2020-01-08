@@ -120,6 +120,41 @@
           }
         }
       }
+    },
+    "BoobleToast": {
+      "projectType": "library",
+      "root": "projects/booble-toast",
+      "sourceRoot": "projects/booble-toast/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/booble-toast/tsconfig.lib.json",
+            "project": "projects/booble-toast/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/booble-toast/src/test.ts",
+            "tsConfig": "projects/booble-toast/tsconfig.spec.json",
+            "karmaConfig": "projects/booble-toast/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/booble-toast/tsconfig.lib.json",
+              "projects/booble-toast/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "booble-toast"
 }

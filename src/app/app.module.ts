@@ -1,3 +1,4 @@
+import { BoobleToastModule } from './../../projects/booble-toast/src/lib/booble-toast.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
